@@ -71,9 +71,9 @@
 <body>
 
     <header>
-        <h1>✨ Feliz Natal ✨</h1>
+        <h1>☃️ Feliz Natal 🎄</h1>
         <p>Que esta época ilumine sua mente, renove sua energia e traga a serenidade necessária para um novo ciclo.</p>
-        <button class="btn-natal" onclick="mensagemNatal()">Receber Mensagem</button>
+        <button class="btn-natal" onclick="mensagemNatal()"> Mensagem</button>
     </header>
 
     <div class="neve"></div>
@@ -114,7 +114,7 @@
 
         // Mensagem natalina
         function mensagemNatal() {
-            alert("🎁 Que sua jornada seja leve, seu espírito firme e sua mente clara. Um Natal de sabedoria e paz pra você.");
+            alert("🎅 Um feliz natal pra todos!");
         }
     </script>
 
