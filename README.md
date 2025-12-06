@@ -17,7 +17,7 @@
         }
 
         header {
-            padding: 50px 20px;
+            padding: 40px 20px 20px;
         }
 
         h1 {
@@ -27,25 +27,15 @@
         }
 
         p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 20px;
         }
 
-        .neve {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 9999;
-        }
-
+        /* Botão */
         .btn-natal {
-            margin-top: 30px;
-            padding: 14px 28px;
+            margin-top: 20px;
+            padding: 12px 26px;
             background: #fff;
             color: #900;
             border-radius: 8px;
@@ -60,8 +50,62 @@
             background: #ffeaea;
         }
 
+        /* Carrossel */
+        .carrossel-container {
+            width: 90%;
+            max-width: 700px;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .carrossel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carrossel img {
+            width: 100%;
+            flex-shrink: 0;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        .controle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            background: rgba(0,0,0,0.4);
+            padding: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .esq {
+            left: 10px;
+        }
+
+        .dir {
+            right: 10px;
+        }
+
+        /* Neve */
+        .neve {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
         footer {
-            margin-top: 60px;
+            margin-top: 50px;
             padding: 20px;
             opacity: 0.8;
             font-size: 0.9rem;
@@ -71,50 +115,81 @@
 <body>
 
     <header>
-        <h1>☃️ Feliz Natal 🎄</h1>
-        <p>Que esta época ilumine sua mente, renove sua energia e traga a serenidade necessária para um novo ciclo.</p>
-        <button class="btn-natal" onclick="mensagemNatal()"> Mensagem</button>
+        <h1>✨ Feliz Natal ✨</h1>
+        <p>Que a serenidade desta época toque sua vida e renove seu caminho.</p>
+        <button class="btn-natal" onclick="mensagemNatal()">Mensagem Especial</button>
     </header>
+
+    <!-- Carrossel -->
+    <div class="carrossel-container">
+        <div class="carrossel" id="carrossel">
+            <img src="https://images.pexels.com/photos/1721161/pexels-photo-1721161.jpeg" alt="Natal 1">
+            <img src="https://images.pexels.com/photos/1303086/pexels-photo-1303086.jpeg" alt="Natal 2">
+            <img src="https://images.pexels.com/photos/1661905/pexels-photo-1661905.jpeg" alt="Natal 3">
+        </div>
+
+        <div class="controle esq" onclick="voltar()">❮</div>
+        <div class="controle dir" onclick="avancar()">❯</div>
+    </div>
 
     <div class="neve"></div>
 
     <footer>
-        © 2025 — Site de Natal desenvolvido para fins comemorativos.
+        © 2025 — Site de Natal.
     </footer>
 
     <script>
-        // Função para gerar neve animada
+        // Carrossel
+        let index = 0;
+
+        function atualizarCarrossel() {
+            const carrossel = document.getElementById("carrossel");
+            const largura = carrossel.clientWidth;
+            carrossel.style.transform = `translateX(${-index * largura}px)`;
+        }
+
+        function avancar() {
+            const total = document.querySelectorAll("#carrossel img").length;
+            index = (index + 1) % total;
+            atualizarCarrossel();
+        }
+
+        function voltar() {
+            const total = document.querySelectorAll("#carrossel img").length;
+            index = (index - 1 + total) % total;
+            atualizarCarrossel();
+        }
+
+        setInterval(avancar, 4000);
+
+        // Neve
         function criarFloco() {
             const floco = document.createElement("div");
-            floco.classList.add("floco");
             floco.innerHTML = "❄";
             floco.style.position = "absolute";
             floco.style.top = "-20px";
             floco.style.left = Math.random() * 100 + "%";
             floco.style.fontSize = (Math.random() * 20 + 10) + "px";
             floco.style.opacity = Math.random();
-            floco.style.animation = `cair ${(Math.random() * 5) + 5}s linear`;
+            floco.style.animation = `cair ${(Math.random() * 6) + 5}s linear`;
             document.querySelector(".neve").appendChild(floco);
 
-            setTimeout(() => floco.remove(), 10000);
+            setTimeout(() => floco.remove(), 12000);
         }
 
         setInterval(criarFloco, 200);
 
-        // Animação da neve
-        const style = document.createElement('style');
-        style.innerHTML = `
+        const animacao = document.createElement("style");
+        animacao.innerHTML = `
             @keyframes cair {
-                to {
-                    transform: translateY(120vh);
-                }
+                to { transform: translateY(120vh); }
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(animacao);
 
-        // Mensagem natalina
+        // Mensagem
         function mensagemNatal() {
-            alert("🎅 Um feliz natal pra todos!");
+            alert("🎅 Um feliz Natal e boas festas a todos!");
         }
     </script>
 
